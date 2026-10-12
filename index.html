@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Lemon Mobile UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Markazi+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#495E57; --yellow:#F4CE14; --grey:#EDEFEE; --text:#333333; --salmon:#EE9972;
+  --white:#ffffff; --muted:#7b8682; --disabled:#c9cecc;
+  --canvas:#f6f4ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);font-family:'Karla',sans-serif;color:var(--text);padding:48px 24px 64px}
+h1.page{font-family:'Markazi Text',serif;font-weight:600;font-size:40px;text-align:center;color:var(--green)}
+p.sub{text-align:center;color:var(--muted);margin:4px 0 40px;font-size:15px}
+.row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+figure{display:flex;flex-direction:column;align-items:center;gap:14px}
+figcaption{font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+
+/* phone */
+.phone{width:390px;height:844px;background:var(--white);border-radius:44px;border:10px solid #1f2926;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.status{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:6px 28px 0;font-weight:700;font-size:15px}
+.status .icons{display:flex;gap:6px;align-items:center}
+.island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:104px;height:28px;background:#1f2926;border-radius:20px}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:128px;height:5px;border-radius:3px;background:#1f2926}
+
+/* logo */
+.logo{display:flex;align-items:center;gap:8px}
+.logo span{font-family:'Markazi Text',serif;font-weight:700;font-size:24px;letter-spacing:.02em;color:var(--green)}
+.logo.big span{font-size:40px}
+
+.topbar{height:56px;flex:none;display:flex;align-items:center;justify-content:center;position:relative}
+.topbar .avatar{position:absolute;right:20px;top:8px}
+.topbar .back{position:absolute;left:20px;top:8px;width:40px;height:40px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--salmon);color:#fff;display:grid;place-items:center;font-family:'Markazi Text',serif;font-weight:700;font-size:20px}
+.avatar.lg{width:76px;height:76px;font-size:34px}
+
+/* ---------- 1 onboarding ---------- */
+.onb{flex:1;display:flex;flex-direction:column;padding:0 28px 40px}
+.onb .logo-wrap{display:flex;justify-content:center;padding-top:36px}
+.onb .hero-art{margin:36px auto 0;width:130px;height:130px;border-radius:50%;background:var(--grey);display:grid;place-items:center}
+.onb h2{font-family:'Markazi Text',serif;font-weight:600;font-size:40px;line-height:1.05;text-align:center;white-space:nowrap;color:var(--green);margin-top:36px}
+.onb p.lead{text-align:center;color:var(--muted);margin-top:8px;font-size:16px}
+.fields{margin-top:36px;display:flex;flex-direction:column;gap:20px}
+.field label{display:block;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin:0 0 8px 6px}
+.input{height:60px;border-radius:30px;border:2px solid var(--grey);background:var(--white);padding:0 24px;display:flex;align-items:center;font-size:18px;color:var(--muted)}
+.input.filled{color:var(--text);background:var(--grey);border-color:var(--grey)}
+.onb .spacer{flex:1}
+.btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;border:2px solid transparent;width:100%}
+.btn.disabled{background:var(--grey);color:var(--disabled)}
+.btn.primary{background:var(--green);color:#fff}
+.btn.yellow{background:var(--yellow);color:var(--text)}
+.btn.outline{border-color:var(--green);color:var(--green);background:var(--white)}
+.btn.small{height:40px;border-radius:20px;font-size:14px;width:auto;padding:0 18px}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:18px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--grey)}
+.dots i.on{background:var(--green);width:24px;border-radius:4px}
+
+/* ---------- 2 home ---------- */
+.hero{background:var(--green);padding:18px 20px 22px;flex:none}
+.hero h2{font-family:'Markazi Text',serif;font-weight:600;font-size:56px;line-height:.95;color:var(--yellow)}
+.hero .city{font-family:'Markazi Text',serif;font-size:30px;color:#fff;line-height:1;margin-top:2px}
+.hero .body{display:flex;gap:14px;margin-top:12px;align-items:flex-start}
+.hero .body p{flex:1;color:#fff;font-size:15px;line-height:1.35;font-weight:500;padding-top:2px}
+.photo{border-radius:18px;overflow:hidden;flex:none;background:var(--grey)}
+.photo svg{display:block;width:100%;height:100%}
+.hero .photo{width:128px;height:136px}
+.search{margin-top:16px;height:46px;border-radius:23px;background:var(--grey);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--muted);font-size:16px}
+.order{padding:20px 20px 0;flex:none}
+.order h3{font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase}
+.pills{display:flex;gap:6px;margin-top:12px}
+.pill{height:38px;padding:0 13px;border-radius:19px;background:var(--grey);color:var(--green);font-weight:700;font-size:14px;display:grid;place-items:center}
+.pill.sel{background:var(--green);color:var(--yellow)}
+.menu{padding:6px 20px 0;flex:1;overflow:hidden}
+.item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--grey);align-items:center}
+.item .txt{flex:1;min-width:0}
+.item h4{font-family:'Markazi Text',serif;font-weight:600;font-size:24px;line-height:1.1;color:var(--text)}
+.item p{font-size:14px;line-height:1.35;color:var(--green);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .price{font-weight:700;font-size:15px;color:var(--salmon);margin-top:5px}
+.item .photo{width:84px;height:84px;border-radius:14px}
+
+/* ---------- 3 profile ---------- */
+.prof{flex:1;padding:0 20px 28px;display:flex;flex-direction:column}
+.prof h2{font-family:'Markazi Text',serif;font-weight:600;font-size:32px;color:var(--green);line-height:1}
+.avrow{display:flex;align-items:center;gap:14px;margin-top:10px}
+.avrow .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.avrow .btns{display:flex;gap:8px}
+.pf{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.pf .field label{font-size:11px;margin-bottom:4px}
+.pf .input{height:42px;border-radius:21px;font-size:16px;padding:0 18px}
+.notif h3{font-family:'Markazi Text',serif;font-weight:600;font-size:26px;color:var(--green);margin:14px 0 4px}
+.chk{display:flex;align-items:center;gap:12px;height:30px;font-size:15px}
+.box{width:20px;height:20px;border-radius:6px;border:2px solid var(--green);display:grid;place-items:center;flex:none}
+.box.on{background:var(--green)}
+.prof .logout{margin-top:14px}
+.prof .actions{display:flex;gap:10px;margin-top:12px}
+.prof .actions .btn{height:48px;font-size:16px}
+.btn.salmon-outline{border-color:var(--salmon);color:var(--salmon);background:var(--white)}
+</style>
+</head>
+<body>
+
+<!-- Reusable SVG art (flat, no gradients) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lemon" viewBox="0 0 48 48">
+    <ellipse cx="24" cy="26" rx="19" ry="15" fill="#F4CE14" transform="rotate(-18 24 26)"/>
+    <path d="M40 14c3-2 5-1 6 0-1 3-4 4-7 3z" fill="#F4CE14"/>
+    <path d="M7 36c-3 2-5 1-6 0 1-3 4-4 7-3z" fill="#F4CE14"/>
+    <path d="M24 9c0-4 4-7 9-6-1 4-4 7-9 6z" fill="#495E57"/>
+    <path d="M24 9l-1 5" stroke="#495E57" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="salad" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#EE9972"/>
+    <circle cx="50" cy="52" r="38" fill="#fff"/>
+    <circle cx="50" cy="52" r="30" fill="#495E57"/>
+    <circle cx="40" cy="44" r="10" fill="#6f8a7f"/><circle cx="60" cy="42" r="9" fill="#8aa396"/>
+    <circle cx="52" cy="62" r="11" fill="#6f8a7f"/><circle cx="36" cy="60" r="7" fill="#F4CE14"/>
+    <circle cx="66" cy="58" r="6" fill="#EE9972"/><circle cx="48" cy="48" r="5" fill="#EE9972"/>
+  </symbol>
+  <symbol id="fish" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#F4CE14"/>
+    <circle cx="50" cy="52" r="38" fill="#fff"/>
+    <ellipse cx="50" cy="52" rx="28" ry="15" fill="#EE9972"/>
+    <path d="M30 52c10-8 30-8 40 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/>
+    <circle cx="70" cy="40" r="5" fill="#495E57"/><circle cx="32" cy="66" r="5" fill="#495E57"/><circle cx="58" cy="68" r="4" fill="#F4CE14"/>
+  </symbol>
+  <symbol id="pasta" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#495E57"/>
+    <circle cx="50" cy="52" r="38" fill="#fff"/>
+    <circle cx="50" cy="52" r="29" fill="#F4CE14"/>
+    <path d="M30 50c8-10 14 8 22-2s14 8 20-2M32 60c8-8 14 8 22-2s12 6 16 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+    <circle cx="44" cy="46" r="5" fill="#EE9972"/><circle cx="60" cy="58" r="5" fill="#EE9972"/><circle cx="52" cy="66" r="3" fill="#495E57"/>
+  </symbol>
+  <symbol id="bruschetta" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#EDEFEE"/>
+    <rect x="12" y="30" width="76" height="22" rx="8" fill="#F4CE14" transform="rotate(-8 50 41)"/>
+    <rect x="14" y="52" width="72" height="22" rx="8" fill="#EE9972" transform="rotate(5 50 63)"/>
+    <circle cx="30" cy="38" r="6" fill="#EE9972"/><circle cx="50" cy="34" r="6" fill="#EE9972"/><circle cx="70" cy="38" r="6" fill="#EE9972"/>
+    <circle cx="36" cy="60" r="5" fill="#495E57"/><circle cx="58" cy="64" r="5" fill="#495E57"/><circle cx="74" cy="60" r="4" fill="#F4CE14"/>
+  </symbol>
+  <symbol id="cake" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#EE9972"/>
+    <ellipse cx="50" cy="76" rx="38" ry="8" fill="#fff"/>
+    <rect x="26" y="40" width="48" height="34" rx="6" fill="#F4CE14"/>
+    <rect x="26" y="40" width="48" height="12" rx="6" fill="#fff"/>
+    <rect x="26" y="56" width="48" height="4" fill="#EE9972"/>
+    <rect x="48" y="26" width="4" height="14" rx="2" fill="#495E57"/><circle cx="50" cy="22" r="4" fill="#EE9972"/>
+  </symbol>
+  <symbol id="drink" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#495E57"/>
+    <path d="M30 26h40l-6 56a4 4 0 0 1-4 4H40a4 4 0 0 1-4-4z" fill="#fff"/>
+    <path d="M33 44h34l-4 38H37z" fill="#F4CE14"/>
+    <circle cx="68" cy="28" r="14" fill="#F4CE14"/><circle cx="68" cy="28" r="9" fill="#fff"/><path d="M68 19v18M59 28h18" stroke="#F4CE14" stroke-width="2"/>
+    <rect x="52" y="10" width="5" height="40" rx="2" fill="#EE9972" transform="rotate(14 54 30)"/>
+  </symbol>
+  <symbol id="table" viewBox="0 0 128 136">
+    <rect width="128" height="136" fill="#EE9972"/>
+    <rect y="96" width="128" height="40" fill="#F4CE14"/>
+    <circle cx="64" cy="68" r="46" fill="#fff"/>
+    <circle cx="64" cy="68" r="36" fill="#EDEFEE"/>
+    <circle cx="52" cy="58" r="12" fill="#495E57"/><circle cx="76" cy="56" r="11" fill="#6f8a7f"/>
+    <circle cx="64" cy="80" r="12" fill="#EE9972"/><circle cx="46" cy="78" r="6" fill="#F4CE14"/><circle cx="82" cy="78" r="6" fill="#F4CE14"/>
+    <use href="#lemon" x="4" y="4" width="34" height="34"/>
+  </symbol>
+</svg>
+
+<h1 class="page">Little Lemon</h1>
+<p class="sub">Mobile UI set · onboarding, home, profile · iPhone 390 × 844 · light mode</p>
+
+<div class="row">
+
+<!-- ================= 1. ONBOARDING ================= -->
+<figure>
+<div class="phone">
+  <div class="island"></div>
+  <div class="status"><span>9:41</span><span class="icons">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#333"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#333"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#333"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#333"/></svg>
+    <svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="#333"/><rect x="2" y="2" width="19" height="8" rx="2" fill="#333"/><rect x="24" y="4" width="2" height="4" rx="1" fill="#333"/></svg>
+  </span></div>
+
+  <div class="onb">
+    <div class="logo-wrap"><div class="logo big"><svg width="52" height="52"><use href="#lemon"/></svg><span>Little Lemon</span></div></div>
+    <div class="hero-art"><svg width="84" height="84"><use href="#lemon"/></svg></div>
+    <h2>Let's get to know you</h2>
+    <p class="lead">Tell us a little about yourself to get started.</p>
+
+    <div class="fields">
+      <div class="field"><label>First name</label><div class="input">Type your first name</div></div>
+      <div class="field"><label>Email</label><div class="input">Type your email</div></div>
+    </div>
+
+    <div class="spacer"></div>
+    <div class="dots"><i class="on"></i><i></i><i></i></div>
+    <div class="btn disabled">Next</div>
+  </div>
+  <div class="homebar"></div>
+</div>
+<figcaption>1 · Onboarding (disabled)</figcaption>
+</figure>
+
+<!-- ================= 2. HOME ================= -->
+<figure>
+<div class="phone">
+  <div class="island"></div>
+  <div class="status"><span>9:41</span><span class="icons">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#333"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#333"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#333"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#333"/></svg>
+    <svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="#333"/><rect x="2" y="2" width="19" height="8" rx="2" fill="#333"/><rect x="24" y="4" width="2" height="4" rx="1" fill="#333"/></svg>
+  </span></div>
+
+  <div class="topbar">
+    <div class="logo"><svg width="28" height="28"><use href="#lemon"/></svg><span>Little Lemon</span></div>
+    <div class="avatar">MG</div>
+  </div>
+
+  <div class="hero">
+    <h2>Little Lemon</h2>
+    <div class="city">Chicago</div>
+    <div class="body">
+      <p>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
+      <div class="photo"><svg viewBox="0 0 128 136" preserveAspectRatio="xMidYMid slice"><use href="#table"/></svg></div>
+    </div>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7b8682" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>
+      Search dishes
+    </div>
+  </div>
+
+  <div class="order">
+    <h3>Order for delivery!</h3>
+    <div class="pills">
+      <div class="pill">Starters</div>
+      <div class="pill sel">Mains</div>
+      <div class="pill">Desserts</div>
+      <div class="pill">Drinks</div>
+    </div>
+  </div>
+
+  <div class="menu">
+    <div class="item">
+      <div class="txt"><h4>Greek Salad</h4><p>The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese.</p><div class="price">$12.99</div></div>
+      <div class="photo"><svg viewBox="0 0 100 100"><use href="#salad"/></svg></div>
+    </div>
+    <div class="item">
+      <div class="txt"><h4>Grilled Fish</h4><p>Barbecued catch with herbs, garlic and a squeeze of lemon, served with seasonal vegetables.</p><div class="price">$20.00</div></div>
+      <div class="photo"><svg viewBox="0 0 100 100"><use href="#fish"/></svg></div>
+    </div>
+    <div class="item">
+      <div class="txt"><h4>Pasta</h4><p>Penne with fried aubergines, tomato sauce, fresh chili, garlic, basil and salted ricotta.</p><div class="price">$18.99</div></div>
+      <div class="photo"><svg viewBox="0 0 100 100"><use href="#pasta"/></svg></div>
+    </div>
+  </div>
+  <div class="homebar"></div>
+</div>
+<figcaption>2 · Home</figcaption>
+</figure>
+
+<!-- ================= 3. PROFILE ================= -->
+<figure>
+<div class="phone">
+  <div class="island"></div>
+  <div class="status"><span>9:41</span><span class="icons">
+    <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#333"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#333"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#333"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#333"/></svg>
+    <svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="#333"/><rect x="2" y="2" width="19" height="8" rx="2" fill="#333"/><rect x="24" y="4" width="2" height="4" rx="1" fill="#333"/></svg>
+  </span></div>
+
+  <div class="topbar">
+    <div class="back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
+    <div class="logo"><svg width="28" height="28"><use href="#lemon"/></svg><span>Little Lemon</span></div>
+    <div class="avatar">MG</div>
+  </div>
+
+  <div class="prof">
+    <h2>Personal information</h2>
+
+    <div class="avrow">
+      <div class="avatar lg">MG</div>
+      <div>
+        <div class="lbl">Avatar image</div>
+        <div class="btns">
+          <div class="btn primary small">Change</div>
+          <div class="btn outline small">Remove</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf">
+      <div class="field"><label>First name</label><div class="input filled">Micole</div></div>
+      <div class="field"><label>Last name</label><div class="input filled">Gonda</div></div>
+      <div class="field"><label>Email</label><div class="input filled">micole@example.com</div></div>
+      <div class="field"><label>Phone number</label><div class="input filled">(217) 555-0113</div></div>
+    </div>
+
+    <div class="notif">
+      <h3>Email notifications</h3>
+      <div class="chk"><div class="box on"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div>Order statuses</div>
+      <div class="chk"><div class="box on"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div>Password changes</div>
+      <div class="chk"><div class="box"></div>Special offers</div>
+      <div class="chk"><div class="box on"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div>Newsletter</div>
+    </div>
+
+    <div class="btn yellow logout">Log out</div>
+    <div class="actions">
+      <div class="btn salmon-outline">Discard changes</div>
+      <div class="btn primary">Save changes</div>
+    </div>
+  </div>
+  <div class="homebar"></div>
+</div>
+<figcaption>3 · Profile</figcaption>
+</figure>
+
+</div>
+</body>
+</html>
